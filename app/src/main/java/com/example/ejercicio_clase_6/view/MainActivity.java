@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.ejercicio_clase_6.R;
@@ -27,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.listaEstudiantes);
 
         List<Estudiante> estudiantes = estudianteController.obtenerEstudiantes();
-        
+        ArrayAdapter<Estudiante> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, estudiantes);
+
+        listView.setAdapter(adapter);
+
 
         //setContentView(R.layout.activity_main_bd);
         setContentView (binding.getRoot());
