@@ -7,13 +7,17 @@
     tools:context=".view.AgregarEstudiantesActivity">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nombre_input"
-        android:layout_width="409dp"
+        android:id="@+id/contenedor_nombre"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="247dp">
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nombre_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ingresa tu nombre" />
@@ -21,14 +25,56 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nota"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="427dp">
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contenedor_nombre">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nota_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ingresa tu nota" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="550dp" />
+
+    <Button
+        android:id="@+id/agregar_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="156dp"
+        android:text="Agregar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nota">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/codigo_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa el codigo de estudiante" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
