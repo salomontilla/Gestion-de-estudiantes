@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         EstudianteController estudianteController = new EstudianteController(this);
 
         binding.agregarBtn.setOnClickListener(v -> {
-            // Aquí lanzamos la nueva actividad (por ejemplo, SecondActivity)
             Intent intent = new Intent(MainActivity.this, AgregarEstudiantesActivity.class);
             startActivity(intent);
         });

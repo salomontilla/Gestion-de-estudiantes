@@ -19,7 +19,7 @@ public class NotaController {
         dbHelper = new DataBaseHelper(context);
     }
 
-    public void agregarNota(int estudianteId, double valor) {
+    public void agregarNota(String estudianteId, double valor) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("estudiante_id", estudianteId);
