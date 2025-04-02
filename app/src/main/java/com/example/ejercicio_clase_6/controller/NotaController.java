@@ -23,7 +23,7 @@ public class NotaController {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("estudiante_id", estudianteId);
-        values.put("valor", valor);
+        values.put("nota", valor);
         db.insert("notas", null, values);
         db.close();
     }
