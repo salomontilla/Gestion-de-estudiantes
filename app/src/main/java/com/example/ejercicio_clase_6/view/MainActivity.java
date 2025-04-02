@@ -2,8 +2,8 @@ package com.example.ejercicio_clase_6.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.ejercicio_clase_6.R;
@@ -21,20 +21,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView (binding.getRoot());
         EstudianteController estudianteController = new EstudianteController(this);
+
+        binding.agregarBtn.setOnClickListener(v -> {
+            // Aquí lanzamos la nueva actividad (por ejemplo, SecondActivity)
+            Intent intent = new Intent(MainActivity.this, AgregarEstudiantesActivity.class);
+            startActivity(intent);
+        });
 
 
         ListView listView = findViewById(R.id.listaEstudiantes);
 
         List<Estudiante> estudiantes = estudianteController.obtenerEstudiantes();
-        ArrayAdapter<Estudiante> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, estudiantes);
+
+        EstudianteListaAdapter adapter = new EstudianteListaAdapter(estudiantes, this);
 
         listView.setAdapter(adapter);
-
-
-        //setContentView(R.layout.activity_main_bd);
-        setContentView (binding.getRoot());
-
 
     }
 }
