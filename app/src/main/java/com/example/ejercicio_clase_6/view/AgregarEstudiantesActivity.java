@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.ejercicio_clase_6.R;
 import com.example.ejercicio_clase_6.controller.EstudianteController;
+import com.example.ejercicio_clase_6.controller.NotaController;
 import com.example.ejercicio_clase_6.databinding.ActivityAgregarEstudiantesBinding;
 import com.example.ejercicio_clase_6.databinding.ActivityMainBinding;
 
@@ -16,6 +17,7 @@ public class AgregarEstudiantesActivity extends AppCompatActivity {
 
     private ActivityAgregarEstudiantesBinding binding;
     private EstudianteController estudianteController = new EstudianteController(this);
+    private NotaController notaController = new NotaController(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,11 @@ public class AgregarEstudiantesActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Por favor, complete todos los campos.", Toast.LENGTH_SHORT).show();
             } else {
                 estudianteController.agregarEstudiante(nombre, codigo);
+                notaController.agregarNota(codigo, Double.parseDouble(nota));
                 Toast.makeText(getApplicationContext(), "Estudiante agregado exitosamente.", Toast.LENGTH_SHORT).show();
+                binding.codigoInput.setText("");
+                binding.nombreInput.setText("");
+                binding.notaInput.setText("");
             }
         });
 
