@@ -45,7 +45,7 @@ public class EstudianteListaAdapter extends BaseAdapter {
 
         // Obtener el estudiante de la lista
         Estudiante estudiante = estudiantes.get(i);
-        NotaController notaController = new NotaController(this);
+        NotaController notaController = new NotaController(context);
 
 
 

@@ -40,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         EstudianteListaAdapter adapter = new EstudianteListaAdapter(estudiantes, this);
         listView.setAdapter(adapter);
 
+        binding.btnNotas.setOnClickListener(v->{
+            Intent intent = new Intent (this, DetallesEstudianteActivity.class);
+            startActivity(intent);
+        });
+
 
 
     }
