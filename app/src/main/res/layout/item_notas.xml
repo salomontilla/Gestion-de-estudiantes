@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text="Nombre"
+        android:text="#"
         android:textAlignment="viewStart"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline5"
@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:text="Codigo"
+        android:text="Nota:"
         android:textAlignment="viewStart"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline6"
@@ -54,5 +54,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="241dp" />
+        app:layout_constraintGuide_begin="205dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

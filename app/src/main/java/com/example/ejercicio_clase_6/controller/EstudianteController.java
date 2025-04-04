@@ -40,4 +40,14 @@ public class EstudianteController {
         cursor.close();
         return lista;
     }
+
+    public Estudiante obtenerEstudiantePorCodigo(String codigo){
+        Estudiante estudiante = new Estudiante();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM estudiantes WHERE estudiante_id = ?", new String[]{String.valueOf(codigo)});
+        if (cursor.moveToNext()){
+            estudiante = new Estudiante(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+        }
+        return estudiante;
+    }
 }

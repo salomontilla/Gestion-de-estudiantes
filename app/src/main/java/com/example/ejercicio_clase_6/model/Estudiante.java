@@ -11,6 +11,9 @@ public class Estudiante {
         this.codigo = codigo;
     }
 
+    public Estudiante() {
+    }
+
     public int getId() {
         return id;
     }

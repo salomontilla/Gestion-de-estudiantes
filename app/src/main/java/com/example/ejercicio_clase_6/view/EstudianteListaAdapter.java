@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.ejercicio_clase_6.R;
+import com.example.ejercicio_clase_6.controller.NotaController;
 import com.example.ejercicio_clase_6.model.Estudiante;
 
 import java.util.List;
@@ -44,14 +45,24 @@ public class EstudianteListaAdapter extends BaseAdapter {
 
         // Obtener el estudiante de la lista
         Estudiante estudiante = estudiantes.get(i);
+        NotaController notaController = new NotaController(this);
+
+
 
         // Referenciar elementos del XML
-        TextView nombre = convertView.findViewById(R.id.nombreEstudiante);
-        TextView codigo = convertView.findViewById(R.id.codigoEstudiante);
+        TextView nombre = convertView.findViewById(R.id.notaNum);
+        TextView codigo = convertView.findViewById(R.id.codigo);
+        TextView promedio = convertView.findViewById(R.id.estudianteNota);
 
         // Asignar datos
         nombre.setText(estudiante.getNombre());
         codigo.setText(estudiante.getCodigo());
+        //obtiene las notas por codigo del estudiante, luego de esa lista obtiene el promedio de notas
+        if(codigo.toString().isEmpty()){
+            System.out.println("esta vacio");
+        }
+        promedio.setText(String.valueOf(notaController
+                .calcularPromedio(notaController.obtenerNotasPorEstudiante(estudiante.getCodigo()))));
 
         return convertView;
     }

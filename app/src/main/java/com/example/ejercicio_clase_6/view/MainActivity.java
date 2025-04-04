@@ -8,9 +8,12 @@ import android.widget.ListView;
 
 import com.example.ejercicio_clase_6.R;
 import com.example.ejercicio_clase_6.controller.EstudianteController;
+import com.example.ejercicio_clase_6.controller.NotaController;
 import com.example.ejercicio_clase_6.databinding.ActivityMainBinding;
 import com.example.ejercicio_clase_6.model.Estudiante;
+import com.example.ejercicio_clase_6.model.Nota;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +25,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView (binding.getRoot());
+
         EstudianteController estudianteController = new EstudianteController(this);
+        NotaController notaController = new NotaController(this);
 
         binding.agregarBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AgregarEstudiantesActivity.class);
@@ -30,13 +35,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        ListView listView = findViewById(R.id.listaEstudiantes);
-
+        ListView listView = binding.listaEstudiantes;
         List<Estudiante> estudiantes = estudianteController.obtenerEstudiantes();
-
         EstudianteListaAdapter adapter = new EstudianteListaAdapter(estudiantes, this);
-
         listView.setAdapter(adapter);
+
+
 
     }
 }

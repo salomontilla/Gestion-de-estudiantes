@@ -19,6 +19,9 @@ public class NotaController {
         dbHelper = new DataBaseHelper(context);
     }
 
+    public NotaController() {
+    }
+
     public void agregarNota(String estudianteId, double valor) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -28,7 +31,7 @@ public class NotaController {
         db.close();
     }
 
-    public List<Nota> obtenerNotasPorEstudiante(int estudianteId) {
+    public List<Nota> obtenerNotasPorEstudiante(String estudianteId) {
         List<Nota> lista = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM notas WHERE estudiante_id = ?", new String[]{String.valueOf(estudianteId)});
@@ -42,4 +45,12 @@ public class NotaController {
         return lista;
     }
 
+    public double calcularPromedio(List<Nota> notas) {
+        if(notas.isEmpty()){
+            return 0;
+        }
+        return (notas.stream()
+                .mapToDouble(Nota::getValor)
+                .sum())/notas.size();
+    }
 }
