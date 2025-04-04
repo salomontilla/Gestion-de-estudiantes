@@ -19,9 +19,6 @@ public class NotaController {
         dbHelper = new DataBaseHelper(context);
     }
 
-    public NotaController() {
-    }
-
     public void agregarNota(String estudianteId, double valor) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -43,6 +40,7 @@ public class NotaController {
             } while (cursor.moveToNext());
         }
         cursor.close();
+        db.close();
         return lista;
     }
 
@@ -54,5 +52,11 @@ public class NotaController {
         return (notas.stream()
                 .mapToDouble(Nota::getValor)
                 .sum())/notas.size();
+    }
+
+    public void eliminarNota(int id) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        db.delete("notas", "id = ?",new String[]{String.valueOf(id)});
+        db.close();
     }
 }

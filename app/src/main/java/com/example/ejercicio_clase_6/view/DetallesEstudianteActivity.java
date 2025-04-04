@@ -1,5 +1,6 @@
 package com.example.ejercicio_clase_6.view;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,6 +21,11 @@ import java.util.List;
 
 public class DetallesEstudianteActivity extends AppCompatActivity {
     ActivityDetallesEstudianteBinding binding;
+    NotaController notaController = new NotaController(this);
+    EstudianteController estudianteController = new EstudianteController(this);
+
+    List<Nota> notas = new ArrayList<>();
+    NotaListaAdapter notasAdapter = new NotaListaAdapter(this, notas);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +33,8 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
         binding = ActivityDetallesEstudianteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        NotaController notaController = new NotaController(this);
-        EstudianteController estudianteController = new EstudianteController(this);
-
         ListView listNotas = binding.listaDeNotas;
-        List<Nota> notas = new ArrayList<>();
-        NotaListaAdapter notasAdapter = new NotaListaAdapter(this, notas);
+
         listNotas.setAdapter(notasAdapter);
 
         binding.verPromedioBtn.setOnClickListener(v -> {
@@ -53,7 +55,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             // Actualiza las notas del estudiante
             notas.clear();
             notas.addAll(notaController.obtenerNotasPorEstudiante(codigoEstudiante));
-            notasAdapter.notifyDataSetChanged(); // Muy importante
+            notasAdapter.notifyDataSetChanged();
 
             // Calcula el promedio con las notas actualizadas
             double promedio = notaController.calcularPromedio(notas);
@@ -63,9 +65,46 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             binding.tvPromedio.setText(String.format("%.2f", promedio));
         });
 
+        //cambio de actividad
         binding.btnVolver.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
+
+        binding.listaDeNotas.setOnItemClickListener((parent, view, position, id)->{
+            Nota notaSeleccionada = notas.get(position);
+            mostrarDialogoOpciones(notaSeleccionada);
+        });
+    }
+    private void mostrarDialogoOpciones(Nota nota) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecciona una acción")
+                .setItems(new CharSequence[]{"Editar", "Eliminar"}, (dialog, which) -> {
+                    if (which == 0) {
+                        // Editar
+                        Intent intent = new Intent(this, EditarNotaActivity.class);
+                        intent.putExtra("idNota", nota.getId()); // pasar el id de la nota
+                        startActivity(intent);
+                    } else if (which == 1) {
+                        // Eliminar
+                        mostrarDialogoConfirmacion(nota);
+                    }
+                })
+                .show();
+    }
+    private void mostrarDialogoConfirmacion(Nota nota) {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmar eliminación")
+                .setMessage("¿Estás seguro de eliminar esta nota?")
+                .setPositiveButton("Sí", (dialog, which) -> {
+                    notaController.eliminarNota(nota.getId());
+                    notas.remove(nota);
+                    notasAdapter.notifyDataSetChanged(); // actualiza la lista
+                    Toast.makeText(this, "Nota eliminada", Toast.LENGTH_SHORT).show();
+                    binding.tvNombre.setText("Ingresa el codigo");
+                    binding.tvPromedio.setText("Ingresa el codigo");
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }
