@@ -66,7 +66,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/codigo_estudiante"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="Ingresa el codigo del estudiante" />
     </com.google.android.material.textfield.TextInputLayout>
 
