@@ -45,7 +45,7 @@ public class NotaListaAdapter extends BaseAdapter {
         TextView numeroNota = convertView.findViewById(R.id.notaNum);
         TextView valorNota = convertView.findViewById(R.id.estudianteNota);
 
-        numeroNota.setText(String.valueOf(getItemId(i)));
+        numeroNota.setText(String.valueOf(getItemId(i+1)));
         valorNota.setText(String.valueOf(nota.getValor()));
         return convertView;
     }

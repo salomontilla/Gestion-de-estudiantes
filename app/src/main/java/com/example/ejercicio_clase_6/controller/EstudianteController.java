@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.ejercicio_clase_6.model.DataBaseHelper;
 import com.example.ejercicio_clase_6.model.Estudiante;
@@ -42,12 +43,27 @@ public class EstudianteController {
     }
 
     public Estudiante obtenerEstudiantePorCodigo(String codigo){
-        Estudiante estudiante = new Estudiante();
+        Estudiante estudiante = null; // Solo lo creamos si lo encontramos
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM estudiantes WHERE codigo = ?", new String[]{String.valueOf(codigo)});
-        if (cursor.moveToNext()){
-            estudiante = new Estudiante(cursor.getInt(0), cursor.getString(1), cursor.getString(2));
+
+        Cursor cursor = db.rawQuery("SELECT * FROM estudiantes WHERE codigo = ?", new String[]{codigo});
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                estudiante = new Estudiante(
+                        cursor.getInt(0),    // id
+                        cursor.getString(1), // nombre
+                        cursor.getString(2)  // codigo
+                );
+                Log.d("DB", "Estudiante encontrado: " + estudiante.getNombre());
+            } else {
+                Log.d("DB", "Estudiante no encontrado con código: " + codigo);
+            }
+            cursor.close(); // Muy importante
         }
+
+        // db.close(); // Opcional, si no estás reutilizando db
+
         return estudiante;
     }
 }

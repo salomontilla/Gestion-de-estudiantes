@@ -37,6 +37,7 @@ public class NotaController {
         Cursor cursor = db.rawQuery("SELECT * FROM notas WHERE estudiante_id = ?", new String[]{String.valueOf(estudianteId)});
 
         if (cursor.moveToFirst()) {
+            System.out.println("si hay nota");
             do {
                 lista.add(new Nota(cursor.getInt(0), cursor.getInt(1), cursor.getDouble(2)));
             } while (cursor.moveToNext());
@@ -47,6 +48,7 @@ public class NotaController {
 
     public double calcularPromedio(List<Nota> notas) {
         if(notas.isEmpty()){
+            System.out.println("notas vacias");
             return 0;
         }
         return (notas.stream()
