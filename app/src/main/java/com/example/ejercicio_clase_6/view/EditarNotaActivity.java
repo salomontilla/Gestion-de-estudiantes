@@ -43,7 +43,7 @@ public class EditarNotaActivity extends AppCompatActivity {
 
             notaController.editarNota(notaId, nuevaNota);
             Toast.makeText(getApplicationContext(), "Nota editada exitosamente.", Toast.LENGTH_SHORT).show();
-
+            binding.tvNombreActualNota.setText(nuevaNotaStr);
             binding.inputNuevaNota.setText("");
         });
 
