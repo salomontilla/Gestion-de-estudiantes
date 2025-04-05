@@ -13,6 +13,7 @@ import com.example.ejercicio_clase_6.controller.NotaController;
 import com.example.ejercicio_clase_6.databinding.ActivityMainBinding;
 import com.example.ejercicio_clase_6.model.Estudiante;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,13 +21,16 @@ public class MainActivity extends AppCompatActivity {
     EstudianteController estudianteController = new EstudianteController(this);
     NotaController notaController = new NotaController(this);
 
+    List<Estudiante> estudiantes = new ArrayList<>();
+    EstudianteListaAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView (binding.getRoot());
 
-        List<Estudiante> estudiantes = estudianteController.obtenerEstudiantes();
+        estudiantes = estudianteController.obtenerEstudiantes();
 
         binding.agregarBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AgregarEstudiantesActivity.class);
@@ -34,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         ListView lvListaEstudiantes = binding.listaEstudiantes;
-        EstudianteListaAdapter adapter = new EstudianteListaAdapter(estudiantes, this);
+        adapter = new EstudianteListaAdapter(estudiantes, this);
         lvListaEstudiantes.setAdapter(adapter);
 
         binding.btnNotas.setOnClickListener(v->{
@@ -44,12 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
         lvListaEstudiantes.setOnItemClickListener((parent, view, position, id)->{
             Estudiante estudianteSeleccionado = estudiantes.get(position);
-            mostrarDialogoOpciones(estudianteSeleccionado, estudiantes);
-            adapter.notifyDataSetChanged(); // actualiza la lista
+            mostrarDialogoOpciones(estudianteSeleccionado);
         });
 
     }
-    private void mostrarDialogoOpciones(Estudiante estudiante, List<Estudiante> lista) {
+    private void mostrarDialogoOpciones(Estudiante estudiante) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecciona una acción")
                 .setItems(new CharSequence[]{"Editar datos", "Eliminar"}, (dialog, which) -> {
@@ -62,21 +65,24 @@ public class MainActivity extends AppCompatActivity {
 
                     } else if (which == 1) {
                         // Eliminar
-                        mostrarDialogoConfirmacion(estudiante, lista);
+                        mostrarDialogoConfirmacion(estudiante);
                     }
                 })
                 .show();
     }
-    private void mostrarDialogoConfirmacion(Estudiante estudiante, List<Estudiante> estudiantes) {
+    private void mostrarDialogoConfirmacion(Estudiante estudiante) {
         new AlertDialog.Builder(this)
                 .setTitle("Confirmar eliminación")
                 .setMessage("¿Estás seguro de eliminar esta nota?")
                 .setPositiveButton("Sí", (dialog, which) -> {
                     estudianteController.eliminarEstudiante(estudiante.getId());
                     estudiantes.remove(estudiante);
-                    Toast.makeText(this, "Estudiante eliminado!", Toast.LENGTH_SHORT).show();
+
                     estudiantes.clear();
                     estudiantes.addAll(estudianteController.obtenerEstudiantes());
+                    adapter.notifyDataSetChanged(); // actualiza la lista
+
+                    Toast.makeText(this, "Estudiante eliminado!", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();

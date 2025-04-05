@@ -28,7 +28,6 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
     List<Nota> notas = new ArrayList<>();
     NotaListaAdapter notasAdapter = new NotaListaAdapter(this, notas);
 
-    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +37,9 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
         ListView listNotas = binding.listaDeNotas;
 
         listNotas.setAdapter(notasAdapter);
+
+        // Calcula el promedio con las notas actualizadas
+        double promedio = notaController.calcularPromedio(notas);
 
         //Accion ver promedio
         binding.verPromedioBtn.setOnClickListener(v -> {
@@ -60,8 +62,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
             notasAdapter.notifyDataSetChanged();
 
-            // Calcula el promedio con las notas actualizadas
-            double promedio = notaController.calcularPromedio(notas);
+
 
             // Muestra los datos
             binding.tvNombre.setText(estudiante.getNombre());
@@ -77,14 +78,14 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
                 Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
                 return;
             }
-                double notaAgregada = Double.parseDouble(nota);
-                notaController.agregarNota(estudiante.getId(), notaAgregada);
-                notas.clear();
-                notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
-                notasAdapter.notifyDataSetChanged();
+            double notaAgregada = Double.parseDouble(nota);
+            notaController.agregarNota(estudiante.getId(), notaAgregada);
+            notas.clear();
+            notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
+            notasAdapter.notifyDataSetChanged();
             Toast.makeText(this, "Nota agregada!", Toast.LENGTH_SHORT).show();
+            binding.tvPromedio.setText(String.valueOf(promedio));
             binding.inputAgregarNotaDetalles.setText("");
-
         });
 
         binding.listaDeNotas.setOnItemClickListener((parent, view, position, id)->{
