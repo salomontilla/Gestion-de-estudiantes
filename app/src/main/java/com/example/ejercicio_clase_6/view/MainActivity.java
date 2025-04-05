@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -19,11 +20,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     EstudianteController estudianteController = new EstudianteController(this);
-    List<Estudiante> estudiantes = estudianteController.obtenerEstudiantes();
-
     NotaController notaController = new NotaController(this);
-    ListView listView = binding.listaEstudiantes;
-    EstudianteListaAdapter adapter = new EstudianteListaAdapter(estudiantes, this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +28,15 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView (binding.getRoot());
 
+        List<Estudiante> estudiantes = estudianteController.obtenerEstudiantes();
+
         binding.agregarBtn.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AgregarEstudiantesActivity.class);
             startActivity(intent);
         });
 
+        ListView listView = binding.listaEstudiantes;
+        EstudianteListaAdapter adapter = new EstudianteListaAdapter(estudiantes, this);
         listView.setAdapter(adapter);
 
         binding.btnNotas.setOnClickListener(v->{
@@ -45,35 +46,36 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemClickListener((parent, view, position, id)->{
             Estudiante estudianteSeleccionado = estudiantes.get(position);
-            mostrarDialogoOpciones(estudianteSeleccionado);
+            mostrarDialogoOpciones(estudianteSeleccionado, estudiantes);
+            adapter.notifyDataSetChanged(); // actualiza la lista
         });
 
     }
-    private void mostrarDialogoOpciones(Estudiante estudiante) {
+    private void mostrarDialogoOpciones(Estudiante estudiante, List<Estudiante> lista) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecciona una acción")
                 .setItems(new CharSequence[]{"Editar datos", "Eliminar"}, (dialog, which) -> {
                     if (which == 0) {
                         // Editar
-                        Intent intent = new Intent(this, EditarNotaActivity.class);
+                        Intent intent = new Intent(this, EditarEstudianteActivity.class);
                         intent.putExtra("codEstudiante", estudiante.getCodigo()); // pasar el codigo
+                        System.out.println("Codigo estudiante: " + estudiante.getCodigo());
                         startActivity(intent);
 
                     } else if (which == 1) {
                         // Eliminar
-                        mostrarDialogoConfirmacion(estudiante);
+                        mostrarDialogoConfirmacion(estudiante, lista);
                     }
                 })
                 .show();
     }
-    private void mostrarDialogoConfirmacion(Estudiante estudiante) {
+    private void mostrarDialogoConfirmacion(Estudiante estudiante, List<Estudiante> estudiantes) {
         new AlertDialog.Builder(this)
                 .setTitle("Confirmar eliminación")
                 .setMessage("¿Estás seguro de eliminar esta nota?")
                 .setPositiveButton("Sí", (dialog, which) -> {
                     estudianteController.eliminarEstudiante(estudiante.getId());
                     estudiantes.remove(estudiante);
-                    adapter.notifyDataSetChanged(); // actualiza la lista
                     Toast.makeText(this, "Estudiante eliminado!", Toast.LENGTH_SHORT).show();
                 })
                 .setNegativeButton("Cancelar", null)

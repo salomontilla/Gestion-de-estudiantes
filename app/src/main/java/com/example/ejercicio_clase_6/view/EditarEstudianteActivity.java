@@ -14,10 +14,10 @@ import com.example.ejercicio_clase_6.model.Estudiante;
 public class EditarEstudianteActivity extends AppCompatActivity {
     ActivityEditarEstudianteBinding binding;
     EstudianteController estudianteController = new EstudianteController(this);
-    String codEstudiante = getIntent().getStringExtra("codEstudiante");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String codEstudiante = getIntent().getStringExtra("codEstudiante");
         super.onCreate(savedInstanceState);
         binding = ActivityEditarEstudianteBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
