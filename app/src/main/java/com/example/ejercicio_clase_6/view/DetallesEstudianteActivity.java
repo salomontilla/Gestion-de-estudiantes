@@ -38,7 +38,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
         listNotas.setAdapter(notasAdapter);
 
         binding.verPromedioBtn.setOnClickListener(v -> {
-            String codigoEstudiante = binding.codigoEstudiante.getText().toString().trim();
+        String codigoEstudiante = binding.codigoEstudiante.getText().toString().trim();
 
             if (codigoEstudiante.isEmpty()) {
                 Toast.makeText(this, "Por favor ingresa un código", Toast.LENGTH_SHORT).show();
@@ -84,7 +84,9 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
                         // Editar
                         Intent intent = new Intent(this, EditarNotaActivity.class);
                         intent.putExtra("idNota", nota.getId()); // pasar el id de la nota
+                        intent.putExtra("notaActual", nota.getValor());
                         startActivity(intent);
+
                     } else if (which == 1) {
                         // Eliminar
                         mostrarDialogoConfirmacion(nota);

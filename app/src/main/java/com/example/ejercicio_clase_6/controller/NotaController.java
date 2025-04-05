@@ -59,4 +59,13 @@ public class NotaController {
         db.delete("notas", "id = ?",new String[]{String.valueOf(id)});
         db.close();
     }
+
+    public void editarNota(int notaId, double nuevoValor) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("nota", nuevoValor);
+        db.update("notas", valores, "id = ?", new String[]{String.valueOf(notaId)});
+        db.close();
+
+    }
 }
