@@ -38,11 +38,11 @@ public class EstudianteListaAdapter extends BaseAdapter {
         return i;
     }
 
-    @SuppressLint("DefaultLocale")
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_estudiante, viewGroup, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_estudiante,
+                    viewGroup, false);
         }
 
         // Obtener el estudiante de la lista

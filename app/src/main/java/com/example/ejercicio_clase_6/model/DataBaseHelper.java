@@ -16,8 +16,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE estudiantes (id INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, codigo TEXT)");
-        sqLiteDatabase.execSQL("CREATE TABLE notas (id INTEGER PRIMARY KEY AUTOINCREMENT, estudiante_id INTEGER, nota REAL," +
+        sqLiteDatabase.execSQL("CREATE TABLE estudiantes (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "nombre TEXT, codigo TEXT)");
+        sqLiteDatabase.execSQL("CREATE TABLE notas (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "estudiante_id INTEGER, nota REAL," +
                 " FOREIGN KEY (estudiante_id) REFERENCES estudiantes(id))");
     }
 

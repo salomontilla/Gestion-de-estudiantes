@@ -46,7 +46,8 @@ public class AgregarEstudiantesActivity extends AppCompatActivity {
                         estudianteController.agregarEstudiante(nombre, codigo);
                         Estudiante nuevoEstudiante = estudianteController.obtenerEstudiantePorCodigo(codigo);
                         notaController.agregarNota(nuevoEstudiante.getId(), Double.parseDouble(nota));
-                        Toast.makeText(getApplicationContext(), "Estudiante agregado exitosamente.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Estudiante agregado exitosamente.",
+                                Toast.LENGTH_SHORT).show();
                         binding.codigoInput.setText("");
                         binding.nombreInput.setText("");
                         binding.notaInput.setText("");

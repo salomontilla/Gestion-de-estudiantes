@@ -31,7 +31,8 @@ public class NotaController {
     public List<Nota> obtenerNotasPorEstudiante(int id) {
         List<Nota> lista = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM notas WHERE estudiante_id = ?", new String[]{String.valueOf(id)});
+        Cursor cursor = db.rawQuery("SELECT * FROM notas WHERE estudiante_id = ?",
+                new String[]{String.valueOf(id)});
 
         if (cursor.moveToFirst()) {
             do {
