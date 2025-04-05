@@ -38,8 +38,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
 
         listNotas.setAdapter(notasAdapter);
 
-        // Calcula el promedio con las notas actualizadas
-        double promedio = notaController.calcularPromedio(notas);
+
 
         //Accion ver promedio
         binding.verPromedioBtn.setOnClickListener(v -> {
@@ -62,6 +61,8 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
             notasAdapter.notifyDataSetChanged();
 
+            // Calcula el promedio con las notas actualizadas
+            double promedio = notaController.calcularPromedio(notas);
 
 
             // Muestra los datos
@@ -83,8 +84,11 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             notas.clear();
             notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
             notasAdapter.notifyDataSetChanged();
+            // Calcula el promedio con las notas actualizadas
+            double promedio = notaController.calcularPromedio(notas);
+
             Toast.makeText(this, "Nota agregada!", Toast.LENGTH_SHORT).show();
-            binding.tvPromedio.setText(String.valueOf(promedio));
+            binding.tvPromedio.setText(String.format("%.1f", promedio));
             binding.inputAgregarNotaDetalles.setText("");
         });
 
