@@ -79,12 +79,20 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             Estudiante estudiante = estudianteController.obtenerEstudiantePorCodigo(codigoEstudiante);
 
             if (codigoEstudiante.isEmpty() || nota.isEmpty()) {
-//                Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
+//              Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
                 binding.codigoEstudiante.setError("Este campo no puede estar vacio!");
                 binding.inputAgregarNotaDetalles.setError("Este campo no puede estar vacio!");
                 return;
             }
+
+            //valida la nota agregada
             double notaAgregada = Double.parseDouble(nota);
+            if(notaAgregada < 1 || notaAgregada > 5){
+                binding.inputAgregarNotaDetalles.setError("La nota debe ser entre 1 y 5!");
+                return;
+            }
+
+            //Agrega la nota y actualiza
             notaController.agregarNota(estudiante.getId(), notaAgregada);
             notas.clear();
             notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));

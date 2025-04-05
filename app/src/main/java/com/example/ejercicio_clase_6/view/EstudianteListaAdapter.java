@@ -58,9 +58,7 @@ public class EstudianteListaAdapter extends BaseAdapter {
         codigo.setText(estudiante.getCodigo());
 
         //obtiene las notas por codigo del estudiante, luego de esa lista obtiene el promedio de notas
-        if(codigo.toString().isEmpty()){
-            nombre.setText("No hay estudiantes!");
-        }
+
         double promedioFormat = notaController
                 .calcularPromedio(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
         promedio.setText(String.format("%.1f", promedioFormat));
