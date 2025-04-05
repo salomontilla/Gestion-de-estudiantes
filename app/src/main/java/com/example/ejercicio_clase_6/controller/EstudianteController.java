@@ -59,11 +59,25 @@ public class EstudianteController {
             } else {
                 Log.d("DB", "Estudiante no encontrado con código: " + codigo);
             }
-            cursor.close(); // Muy importante
+            cursor.close();
         }
 
-        // db.close(); // Opcional, si no estás reutilizando db
-
+        db.close();
         return estudiante;
+    }
+
+    public void eliminarEstudiante(int id) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        db.delete("estudiantes", "id = ?",new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    public void editarEstudiante(String nuevoNombre, String nuevoCodigo, String codigoActual){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        valores.put("nombre", nuevoNombre);
+        valores.put("codigo", nuevoCodigo);
+        db.update("notas", valores, "id = ?", new String[]{codigoActual});
+        db.close();
     }
 }

@@ -7,7 +7,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ejercicio_clase_6.controller.NotaController;
-import com.example.ejercicio_clase_6.databinding.ActivityDetallesEstudianteBinding;
 import com.example.ejercicio_clase_6.databinding.ActivityEditarNotaBinding;
 
 public class EditarNotaActivity extends AppCompatActivity {
@@ -25,9 +24,9 @@ public class EditarNotaActivity extends AppCompatActivity {
         double notaActual = getIntent().getDoubleExtra("notaActual", -1);
 
 
-        binding.tvNotaActual.setText(String.valueOf(notaActual));
+        binding.tvNombreActualNota.setText(String.valueOf(notaActual));
 
-        binding.btnEditar.setOnClickListener(v->{
+        binding.btnEditarNota.setOnClickListener(v->{
             String nuevaNota = String.valueOf(binding.inputNuevaNota.getText());
             if(nuevaNota.isEmpty()){
                 Toast.makeText(getApplicationContext(), "Por favor, complete todos los campos.", Toast.LENGTH_SHORT).show();
@@ -41,7 +40,7 @@ public class EditarNotaActivity extends AppCompatActivity {
 
 
 
-        binding.btnVolverEditar.setOnClickListener(v-> {
+        binding.btnVolverEditarNota.setOnClickListener(v-> {
             Intent intent = new Intent(this, DetallesEstudianteActivity.class);
             startActivity(intent);
         });

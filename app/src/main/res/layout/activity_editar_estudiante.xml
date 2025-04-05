@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.EditarNotaActivity">
+    tools:context=".view.EditarEstudianteActivity">
 
     <TextView
         android:id="@+id/textView11"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Editar Nota"
+        android:text="Editar Estudiante"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline16"
@@ -33,8 +33,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
-        android:text="Nota Actual:"
+        android:layout_marginTop="56dp"
+        android:text="Nombre Actual:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline16" />
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="56dp"
-        android:text="Nueva Nota:"
+        android:text="Nuevo nombre:"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView12" />
@@ -61,18 +61,18 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_nombre_actual_nota">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_nueva_nota"
+            android:id="@+id/input_nuevo_nombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Ingresa la nueva nota" />
+            android:hint="Ingresa el nuevo nombre" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/tv_nombre_actual_nota"
+        android:id="@+id/tv_nombre_actual_est"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:text="Nota"
+        android:layout_marginTop="56dp"
+        android:text="Nombre"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/guideline17"
         app:layout_constraintTop_toTopOf="@+id/guideline16" />
@@ -85,17 +85,17 @@
         app:layout_constraintGuide_begin="155dp" />
 
     <Button
-        android:id="@+id/btn_editar_nota"
+        android:id="@+id/btn_editar_est"
         android:layout_width="94dp"
         android:layout_height="64dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="Editar"
         app:layout_constraintBottom_toTopOf="@+id/guideline18"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_volver_editar_nota"
+        android:id="@+id/btn_volver_editar_est"
         android:layout_width="90dp"
         android:layout_height="64dp"
         android:layout_marginTop="32dp"
@@ -109,5 +109,66 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="405dp" />
+        app:layout_constraintGuide_begin="613dp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="56dp"
+        android:text="Codigo Actual:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="56dp"
+        android:text="Nuevo codigo:"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/tv_codigo_actual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Codigo"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toBottomOf="@+id/textInputly" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline17"
+        app:layout_constraintTop_toBottomOf="@+id/tv_codigo_actual">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_nuevo_codigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ingresa el nuevo codigo" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="Para editar las notas, ve a la seccion &quot;Ver notas&quot; del menú principal"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/btn_editar_nota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

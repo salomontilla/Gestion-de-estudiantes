@@ -66,6 +66,5 @@ public class NotaController {
         valores.put("nota", nuevoValor);
         db.update("notas", valores, "id = ?", new String[]{String.valueOf(notaId)});
         db.close();
-
     }
 }
