@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView (binding.getRoot());
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, AgregarEstudiantesActivity.class);
             startActivity(intent);
         });
-
+        //Asigna el adapter a la list view
         ListView lvListaEstudiantes = binding.listaEstudiantes;
         adapter = new EstudianteListaAdapter(estudiantes, this);
         lvListaEstudiantes.setAdapter(adapter);
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    //Muestra dialogos de opciones
     private void mostrarDialogoOpciones(Estudiante estudiante) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Selecciona una acción")

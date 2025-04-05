@@ -49,9 +49,6 @@ public class EstudianteListaAdapter extends BaseAdapter {
         Estudiante estudiante = estudiantes.get(i);
         NotaController notaController = new NotaController(context);
 
-
-
-        // Referenciar elementos del XML
         TextView nombre = convertView.findViewById(R.id.notaNum);
         TextView codigo = convertView.findViewById(R.id.codigo);
         TextView promedio = convertView.findViewById(R.id.estudianteNota);
@@ -59,9 +56,10 @@ public class EstudianteListaAdapter extends BaseAdapter {
         // Asignar datos
         nombre.setText(estudiante.getNombre());
         codigo.setText(estudiante.getCodigo());
+
         //obtiene las notas por codigo del estudiante, luego de esa lista obtiene el promedio de notas
         if(codigo.toString().isEmpty()){
-            System.out.println("esta vacio");
+            nombre.setText("No hay estudiantes!");
         }
         double promedioFormat = notaController
                 .calcularPromedio(notaController.obtenerNotasPorEstudiante(estudiante.getId()));

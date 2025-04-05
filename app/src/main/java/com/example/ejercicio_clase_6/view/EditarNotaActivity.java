@@ -26,16 +26,25 @@ public class EditarNotaActivity extends AppCompatActivity {
 
         binding.tvNombreActualNota.setText(String.valueOf(notaActual));
 
-        binding.btnEditarNota.setOnClickListener(v->{
-            String nuevaNota = String.valueOf(binding.inputNuevaNota.getText());
-            if(nuevaNota.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Por favor, complete todos los campos.", Toast.LENGTH_SHORT).show();
-            }else{
-                System.out.println("ID de la nota que se va a editar: " + notaId);
-                notaController.editarNota(notaId,Double.parseDouble(nuevaNota));
-                Toast.makeText(getApplicationContext(), "Nota editada exitosamente.", Toast.LENGTH_SHORT).show();
+        binding.btnEditarNota.setOnClickListener(v -> {
+            String nuevaNotaStr = binding.inputNuevaNota.getText().toString().trim();
 
+            if (nuevaNotaStr.isEmpty()) {
+                binding.inputNuevaNota.setError("Ingresa una nota!");
+                return;
             }
+
+            double nuevaNota = Double.parseDouble(nuevaNotaStr);;
+
+            if (nuevaNota < 1.0 || nuevaNota > 5.0) {
+                binding.inputNuevaNota.setError("La nota debe estar entre 1.0 y 5.0.");
+                return;
+            }
+
+            notaController.editarNota(notaId, nuevaNota);
+            Toast.makeText(getApplicationContext(), "Nota editada exitosamente.", Toast.LENGTH_SHORT).show();
+
+            binding.inputNuevaNota.setText("");
         });
 
 

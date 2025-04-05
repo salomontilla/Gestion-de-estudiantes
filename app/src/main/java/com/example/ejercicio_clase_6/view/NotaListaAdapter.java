@@ -38,9 +38,11 @@ public class NotaListaAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
+
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_notas, viewGroup, false);
         }
+
         Nota nota = notas.get(i);
         TextView numeroNota = convertView.findViewById(R.id.notaNum);
         TextView valorNota = convertView.findViewById(R.id.estudianteNota);
