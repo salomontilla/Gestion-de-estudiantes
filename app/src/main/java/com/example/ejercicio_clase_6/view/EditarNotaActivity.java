@@ -39,6 +39,8 @@ public class EditarNotaActivity extends AppCompatActivity {
             }
         });
 
+
+
         binding.btnVolverEditar.setOnClickListener(v-> {
             Intent intent = new Intent(this, DetallesEstudianteActivity.class);
             startActivity(intent);

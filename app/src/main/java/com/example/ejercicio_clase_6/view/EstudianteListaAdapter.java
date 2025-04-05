@@ -1,5 +1,6 @@
 package com.example.ejercicio_clase_6.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +38,7 @@ public class EstudianteListaAdapter extends BaseAdapter {
         return i;
     }
 
+    @SuppressLint("DefaultLocale")
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         if (convertView == null) {
@@ -61,8 +63,9 @@ public class EstudianteListaAdapter extends BaseAdapter {
         if(codigo.toString().isEmpty()){
             System.out.println("esta vacio");
         }
-        promedio.setText(String.valueOf(notaController
-                .calcularPromedio(notaController.obtenerNotasPorEstudiante(estudiante.getCodigo()))));
+        double promedioFormat = notaController
+                .calcularPromedio(notaController.obtenerNotasPorEstudiante(estudiante.getCodigo()));
+        promedio.setText(String.format("%.1f", promedioFormat));
 
         return convertView;
     }

@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:text="Promedio de notas"
         android:textAlignment="center"
@@ -24,8 +24,6 @@
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
         android:text="Notas"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -39,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="253dp" />
+        app:layout_constraintGuide_begin="232dp" />
 
     <ListView
         android:id="@+id/listaDeNotas"
@@ -96,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Nombre:"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -114,7 +112,7 @@
         android:id="@+id/tv_nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="Ingresa el codigo"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
@@ -132,22 +130,20 @@
 
     <Button
         android:id="@+id/btn_volver"
-        android:layout_width="104dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="32dp"
         android:text="Volver"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_promedio" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_agregar_nota_detalles" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
         android:text="Cantidad"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -171,9 +167,43 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline15"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="282dp" />
+
+    <Button
+        android:id="@+id/btn_agregar_nota_detalles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Agregar Nota"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout3"
+        app:layout_constraintTop_toTopOf="@+id/guideline19" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="318dp" />
+        app:layout_constraintGuide_begin="579dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline19">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_agregar_nota_detalles"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Nueva nota" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

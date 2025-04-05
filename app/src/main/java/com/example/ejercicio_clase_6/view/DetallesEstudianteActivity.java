@@ -3,6 +3,7 @@ package com.example.ejercicio_clase_6.view;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -27,6 +28,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
     List<Nota> notas = new ArrayList<>();
     NotaListaAdapter notasAdapter = new NotaListaAdapter(this, notas);
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
 
         listNotas.setAdapter(notasAdapter);
 
+        //Accion ver promedio
         binding.verPromedioBtn.setOnClickListener(v -> {
         String codigoEstudiante = binding.codigoEstudiante.getText().toString().trim();
 
@@ -62,7 +65,28 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
 
             // Muestra los datos
             binding.tvNombre.setText(estudiante.getNombre());
-            binding.tvPromedio.setText(String.format("%.2f", promedio));
+            binding.tvPromedio.setText(String.format("%.1f", promedio));
+
+        });
+        binding.btnAgregarNotaDetalles.setOnClickListener(view->{
+            String codigoEstudiante = binding.codigoEstudiante.getText().toString().trim();
+            String nota = String.valueOf(binding.inputAgregarNotaDetalles.getText());
+            if (codigoEstudiante.isEmpty() || nota.isEmpty()) {
+                Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
+                return;
+            }
+                double notaAgregada = Double.parseDouble(nota);
+                notaController.agregarNota(codigoEstudiante, notaAgregada);
+                notas.clear();
+                notas.addAll(notaController.obtenerNotasPorEstudiante(codigoEstudiante));
+                notasAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Nota agregada!", Toast.LENGTH_SHORT).show();
+
+        });
+
+        binding.listaDeNotas.setOnItemClickListener((parent, view, position, id)->{
+            Nota notaSeleccionada = notas.get(position);
+            mostrarDialogoOpciones(notaSeleccionada);
         });
 
         //cambio de actividad
@@ -71,10 +95,6 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        binding.listaDeNotas.setOnItemClickListener((parent, view, position, id)->{
-            Nota notaSeleccionada = notas.get(position);
-            mostrarDialogoOpciones(notaSeleccionada);
-        });
     }
     private void mostrarDialogoOpciones(Nota nota) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
