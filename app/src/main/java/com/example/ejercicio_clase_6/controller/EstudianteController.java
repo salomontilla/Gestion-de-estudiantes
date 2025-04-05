@@ -77,7 +77,7 @@ public class EstudianteController {
         ContentValues valores = new ContentValues();
         valores.put("nombre", nuevoNombre);
         valores.put("codigo", nuevoCodigo);
-        db.update("notas", valores, "id = ?", new String[]{codigoActual});
+        db.update("estudiantes", valores, "codigo = ?", new String[]{codigoActual});
         db.close();
     }
 }

@@ -29,8 +29,8 @@ public class EditarEstudianteActivity extends AppCompatActivity {
         tvNombreActual.setText(nombreActual);
 
         String codigoActual = estudiante.getCodigo();
-        TextView tvCodigoActual = binding.tvNombreActualEst;
-        tvCodigoActual.setText(nombreActual);
+        TextView tvCodigoActual = binding.tvCodigoActual;
+        tvCodigoActual.setText(codigoActual);
 
         binding.btnEditarEst.setOnClickListener(v->{
             String nuevoNombre = binding.inputNuevoNombre.getText().toString();
