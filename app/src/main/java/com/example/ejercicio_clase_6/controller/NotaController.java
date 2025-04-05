@@ -45,9 +45,9 @@ public class NotaController {
 
     public double calcularPromedio(List<Nota> notas) {
         if(notas.isEmpty()){
-            System.out.println("notas vacias");
             return 0;
         }
+        //itera sobre cada elemento de la lista para obtener su valor y sumarlo para obtener promedio
         return (notas.stream()
                 .mapToDouble(Nota::getValor)
                 .sum())/notas.size();

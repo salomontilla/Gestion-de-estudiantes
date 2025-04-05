@@ -43,26 +43,20 @@ public class EstudianteController {
     }
 
     public Estudiante obtenerEstudiantePorCodigo(String codigo){
-        Estudiante estudiante = null; // Solo lo creamos si lo encontramos
+        Estudiante estudiante = null;
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * FROM estudiantes WHERE codigo = ?", new String[]{codigo});
 
-        if (cursor != null) {
             if (cursor.moveToFirst()) {
                 estudiante = new Estudiante(
                         cursor.getInt(0),    // id
                         cursor.getString(1), // nombre
                         cursor.getString(2)  // codigo
                 );
-                Log.d("DB", "Estudiante encontrado: " + estudiante.getNombre());
-            } else {
-                Log.d("DB", "Estudiante no encontrado con código: " + codigo);
             }
             cursor.close();
-        }
-
-        db.close();
+            db.close();
         return estudiante;
     }
 

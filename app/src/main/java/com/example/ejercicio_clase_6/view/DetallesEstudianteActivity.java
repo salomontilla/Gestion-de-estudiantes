@@ -70,6 +70,8 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             binding.tvPromedio.setText(String.format("%.1f", promedio));
 
         });
+
+        //Accion Agregar notas
         binding.btnAgregarNotaDetalles.setOnClickListener(view->{
             String codigoEstudiante = binding.codigoEstudiante.getText().toString().trim();
             String nota = String.valueOf(binding.inputAgregarNotaDetalles.getText());
@@ -84,6 +86,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             notas.clear();
             notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
             notasAdapter.notifyDataSetChanged();
+
             // Calcula el promedio con las notas actualizadas
             double promedio = notaController.calcularPromedio(notas);
 
@@ -92,6 +95,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             binding.inputAgregarNotaDetalles.setText("");
         });
 
+        //Accion para editar o eliminar notas
         binding.listaDeNotas.setOnItemClickListener((parent, view, position, id)->{
             Nota notaSeleccionada = notas.get(position);
             mostrarDialogoOpciones(notaSeleccionada);

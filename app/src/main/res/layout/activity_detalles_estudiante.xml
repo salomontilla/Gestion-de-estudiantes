@@ -202,8 +202,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_agregar_nota_detalles"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Nueva nota" />
+            android:layout_height="wrap_content"
+            android:hint="Nueva nota"
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
