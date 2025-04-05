@@ -32,18 +32,36 @@ public class EditarEstudianteActivity extends AppCompatActivity {
         TextView tvCodigoActual = binding.tvCodigoActual;
         tvCodigoActual.setText(codigoActual);
 
-        binding.btnEditarEst.setOnClickListener(v->{
-            String nuevoNombre = binding.inputNuevoNombre.getText().toString();
-            String nuevoCodigo = binding.inputNuevoCodigo.getText().toString();
-            if(nuevoNombre.isEmpty() || nuevoCodigo.isEmpty()){
-                Toast.makeText(this, "Completa todos los campos!", Toast.LENGTH_SHORT).show();
-            }else{
-                estudianteController.editarEstudiante(nuevoNombre, nuevoCodigo, estudiante.getId());
-                Toast.makeText(this, "Estudiante Editado Exitosamente!", Toast.LENGTH_SHORT).show();
+        binding.btnEditarEst.setOnClickListener(v -> {
+            String nuevoNombre = binding.inputNuevoNombre.getText().toString().trim();
+            String nuevoCodigo = binding.inputNuevoCodigo.getText().toString().trim();
 
-                tvNombreActual.setText(nuevoNombre);
-                tvCodigoActual.setText(nuevoCodigo);
+            // Verifica si no hay cambios
+            if (nuevoNombre.isEmpty() && nuevoCodigo.isEmpty()) {
+                Toast.makeText(this, "No se detectaron cambios.", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            // Usa los valores actuales si los inputs están vacíos
+            if (nuevoNombre.isEmpty()) nuevoNombre = estudiante.getNombre();
+            if (nuevoCodigo.isEmpty()) nuevoCodigo = estudiante.getCodigo();
+
+            // Verifica si el código ingresado ya está en uso por otro estudiante
+            Estudiante estudianteExistente = estudianteController.obtenerEstudiantePorCodigo(nuevoCodigo);
+            if (estudianteExistente != null && estudianteExistente.getId() != estudiante.getId()) {
+                binding.inputNuevoCodigo.setError("Este código ya está en uso.");
+                return;
+            }
+
+            // Llama al método para editar
+            estudianteController.editarEstudiante(nuevoNombre, nuevoCodigo, estudiante.getId());
+            Toast.makeText(this, "Estudiante editado exitosamente.", Toast.LENGTH_SHORT).show();
+
+            tvNombreActual.setText(nuevoNombre);
+            tvCodigoActual.setText(nuevoCodigo);
+
+            binding.inputNuevoNombre.setText("");
+            binding.inputNuevoCodigo.setText("");
         });
 
         binding.btnVolverEditarEst.setOnClickListener(v->{

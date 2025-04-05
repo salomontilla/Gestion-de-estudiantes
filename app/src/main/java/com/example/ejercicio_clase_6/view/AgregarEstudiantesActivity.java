@@ -23,7 +23,7 @@ public class AgregarEstudiantesActivity extends AppCompatActivity {
         binding = ActivityAgregarEstudiantesBinding.inflate(getLayoutInflater());
         setContentView (binding.getRoot());
 
-
+        //Accion agregar estudiante
         binding.agregarButton.setOnClickListener(view -> {
             String codigo = binding.codigoInput.getText().toString();
             String nombre = binding.nombreInput.getText().toString();
@@ -36,11 +36,11 @@ public class AgregarEstudiantesActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "Por favor, complete todos los campos.", Toast.LENGTH_SHORT).show();
             }else {
                 double notaValid = Double.parseDouble(nota);
-                if((notaValid <1 || notaValid > 5)){
+                if((notaValid <1 || notaValid > 5)){//valida entre 1 y 5
                     binding.notaInput.setError("La nota debe ser entre 1 y 5!");
                 }else{
                     Estudiante estudiante = estudianteController.obtenerEstudiantePorCodigo(codigo);
-                    if(estudiante != null){
+                    if(estudiante != null){//valida que no haya codigos en uso
                         binding.codigoInput.setError("Este codigo ya esta en uso!");
                     }else{
                         estudianteController.agregarEstudiante(nombre, codigo);

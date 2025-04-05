@@ -45,14 +45,15 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
         String codigoEstudiante = binding.codigoEstudiante.getText().toString().trim();
 
             if (codigoEstudiante.isEmpty()) {
-                Toast.makeText(this, "Por favor ingresa un código", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Por favor ingresa un código", Toast.LENGTH_SHORT).show();
+                binding.codigoEstudiante.setError("Este campo no puede estar vacio!");
                 return;
             }
 
             Estudiante estudiante = estudianteController.obtenerEstudiantePorCodigo(codigoEstudiante);
 
             if (estudiante == null) {
-                Toast.makeText(this, "Estudiante no encontrado", Toast.LENGTH_SHORT).show();
+                binding.codigoEstudiante.setError("Estudiante no encontrado!");
                 return;
             }
 
@@ -78,7 +79,9 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
             Estudiante estudiante = estudianteController.obtenerEstudiantePorCodigo(codigoEstudiante);
 
             if (codigoEstudiante.isEmpty() || nota.isEmpty()) {
-                Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
+                binding.codigoEstudiante.setError("Este campo no puede estar vacio!");
+                binding.inputAgregarNotaDetalles.setError("Este campo no puede estar vacio!");
                 return;
             }
             double notaAgregada = Double.parseDouble(nota);
