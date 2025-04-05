@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -13,7 +12,6 @@ import com.example.ejercicio_clase_6.controller.EstudianteController;
 import com.example.ejercicio_clase_6.controller.NotaController;
 import com.example.ejercicio_clase_6.databinding.ActivityMainBinding;
 import com.example.ejercicio_clase_6.model.Estudiante;
-import com.example.ejercicio_clase_6.model.Nota;
 
 import java.util.List;
 
@@ -35,16 +33,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        ListView listView = binding.listaEstudiantes;
+        ListView lvListaEstudiantes = binding.listaEstudiantes;
         EstudianteListaAdapter adapter = new EstudianteListaAdapter(estudiantes, this);
-        listView.setAdapter(adapter);
+        lvListaEstudiantes.setAdapter(adapter);
 
         binding.btnNotas.setOnClickListener(v->{
             Intent intent = new Intent (this, DetallesEstudianteActivity.class);
             startActivity(intent);
         });
 
-        listView.setOnItemClickListener((parent, view, position, id)->{
+        lvListaEstudiantes.setOnItemClickListener((parent, view, position, id)->{
             Estudiante estudianteSeleccionado = estudiantes.get(position);
             mostrarDialogoOpciones(estudianteSeleccionado, estudiantes);
             adapter.notifyDataSetChanged(); // actualiza la lista
@@ -77,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
                     estudianteController.eliminarEstudiante(estudiante.getId());
                     estudiantes.remove(estudiante);
                     Toast.makeText(this, "Estudiante eliminado!", Toast.LENGTH_SHORT).show();
+                    estudiantes.clear();
+                    estudiantes.addAll(estudianteController.obtenerEstudiantes());
                 })
                 .setNegativeButton("Cancelar", null)
                 .show();

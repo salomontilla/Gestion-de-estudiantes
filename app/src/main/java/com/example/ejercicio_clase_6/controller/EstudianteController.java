@@ -72,12 +72,12 @@ public class EstudianteController {
         db.close();
     }
 
-    public void editarEstudiante(String nuevoNombre, String nuevoCodigo, String codigoActual){
+    public void editarEstudiante(String nuevoNombre, String nuevoCodigo, int id){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put("nombre", nuevoNombre);
         valores.put("codigo", nuevoCodigo);
-        db.update("estudiantes", valores, "codigo = ?", new String[]{codigoActual});
+        db.update("estudiantes", valores, "id = ?", new String[]{String.valueOf(id)});
         db.close();
     }
 }

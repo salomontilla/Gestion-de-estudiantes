@@ -57,7 +57,7 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
 
             // Actualiza las notas del estudiante
             notas.clear();
-            notas.addAll(notaController.obtenerNotasPorEstudiante(codigoEstudiante));
+            notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
             notasAdapter.notifyDataSetChanged();
 
             // Calcula el promedio con las notas actualizadas
@@ -71,16 +71,19 @@ public class DetallesEstudianteActivity extends AppCompatActivity {
         binding.btnAgregarNotaDetalles.setOnClickListener(view->{
             String codigoEstudiante = binding.codigoEstudiante.getText().toString().trim();
             String nota = String.valueOf(binding.inputAgregarNotaDetalles.getText());
+            Estudiante estudiante = estudianteController.obtenerEstudiantePorCodigo(codigoEstudiante);
+
             if (codigoEstudiante.isEmpty() || nota.isEmpty()) {
                 Toast.makeText(this, "Por favor llena todos los campos", Toast.LENGTH_SHORT).show();
                 return;
             }
                 double notaAgregada = Double.parseDouble(nota);
-                notaController.agregarNota(codigoEstudiante, notaAgregada);
+                notaController.agregarNota(estudiante.getId(), notaAgregada);
                 notas.clear();
-                notas.addAll(notaController.obtenerNotasPorEstudiante(codigoEstudiante));
+                notas.addAll(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
                 notasAdapter.notifyDataSetChanged();
             Toast.makeText(this, "Nota agregada!", Toast.LENGTH_SHORT).show();
+            binding.inputAgregarNotaDetalles.setText("");
 
         });
 

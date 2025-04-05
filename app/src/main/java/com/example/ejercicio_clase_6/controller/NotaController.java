@@ -19,22 +19,21 @@ public class NotaController {
         dbHelper = new DataBaseHelper(context);
     }
 
-    public void agregarNota(String estudianteId, double valor) {
+    public void agregarNota(int id, double valor) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("estudiante_id", estudianteId);
+        values.put("estudiante_id", id);
         values.put("nota", valor);
         db.insert("notas", null, values);
         db.close();
     }
 
-    public List<Nota> obtenerNotasPorEstudiante(String estudianteId) {
+    public List<Nota> obtenerNotasPorEstudiante(int id) {
         List<Nota> lista = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM notas WHERE estudiante_id = ?", new String[]{String.valueOf(estudianteId)});
+        Cursor cursor = db.rawQuery("SELECT * FROM notas WHERE estudiante_id = ?", new String[]{String.valueOf(id)});
 
         if (cursor.moveToFirst()) {
-            System.out.println("si hay nota");
             do {
                 lista.add(new Nota(cursor.getInt(0), cursor.getInt(1), cursor.getDouble(2)));
             } while (cursor.moveToNext());

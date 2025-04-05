@@ -38,7 +38,7 @@ public class EditarEstudianteActivity extends AppCompatActivity {
             if(nuevoNombre.isEmpty() || nuevoCodigo.isEmpty()){
                 Toast.makeText(this, "Completa todos los campos!", Toast.LENGTH_SHORT).show();
             }else{
-                estudianteController.editarEstudiante(nuevoNombre, nuevoCodigo, codigoActual);
+                estudianteController.editarEstudiante(nuevoNombre, nuevoCodigo, estudiante.getId());
                 Toast.makeText(this, "Estudiante Editado Exitosamente!", Toast.LENGTH_SHORT).show();
 
                 tvNombreActual.setText(nuevoNombre);

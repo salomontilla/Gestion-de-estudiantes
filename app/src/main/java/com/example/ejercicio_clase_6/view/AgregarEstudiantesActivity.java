@@ -12,6 +12,7 @@ import com.example.ejercicio_clase_6.controller.EstudianteController;
 import com.example.ejercicio_clase_6.controller.NotaController;
 import com.example.ejercicio_clase_6.databinding.ActivityAgregarEstudiantesBinding;
 import com.example.ejercicio_clase_6.databinding.ActivityMainBinding;
+import com.example.ejercicio_clase_6.model.Estudiante;
 
 public class AgregarEstudiantesActivity extends AppCompatActivity {
 
@@ -30,11 +31,13 @@ public class AgregarEstudiantesActivity extends AppCompatActivity {
             String codigo = binding.codigoInput.getText().toString();
             String nombre = binding.nombreInput.getText().toString();
             String nota = binding.notaInput.getText().toString();
+
             if (codigo.isEmpty() || nombre.isEmpty() || nota.isEmpty()) {
                 Toast.makeText(getApplicationContext(), "Por favor, complete todos los campos.", Toast.LENGTH_SHORT).show();
             } else {
                 estudianteController.agregarEstudiante(nombre, codigo);
-                notaController.agregarNota(codigo, Double.parseDouble(nota));
+                Estudiante estudiante = estudianteController.obtenerEstudiantePorCodigo(codigo);
+                notaController.agregarNota(estudiante.getId(), Double.parseDouble(nota));
                 Toast.makeText(getApplicationContext(), "Estudiante agregado exitosamente.", Toast.LENGTH_SHORT).show();
                 binding.codigoInput.setText("");
                 binding.nombreInput.setText("");

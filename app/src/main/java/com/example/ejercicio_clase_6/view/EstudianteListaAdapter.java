@@ -64,7 +64,7 @@ public class EstudianteListaAdapter extends BaseAdapter {
             System.out.println("esta vacio");
         }
         double promedioFormat = notaController
-                .calcularPromedio(notaController.obtenerNotasPorEstudiante(estudiante.getCodigo()));
+                .calcularPromedio(notaController.obtenerNotasPorEstudiante(estudiante.getId()));
         promedio.setText(String.format("%.1f", promedioFormat));
 
         return convertView;
